@@ -31,7 +31,7 @@ func Index(todos []db.Todo) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Todo App</title><link rel=\"stylesheet\" href=\"/static/css/app.css\"><script src=\"https://unpkg.com/htmx.org@2.0.4\"></script></head><body><h1>Todos</h1><form hx-post=\"/todos\" hx-target=\"#todo-list\" hx-swap=\"beforeend\" hx-on::after-request=\"this.reset()\"><input type=\"text\" name=\"title\" placeholder=\"What needs to be done?\" required> <button type=\"submit\">Add</button></form><ul id=\"todo-list\">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Todo App</title><link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"><link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin><link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&amp;display=swap\"><link rel=\"stylesheet\" href=\"/static/css/app.css\"><script src=\"https://unpkg.com/htmx.org@2.0.4\"></script></head><body><h1>Todos</h1><form hx-post=\"/todos\" hx-target=\"#todo-list\" hx-swap=\"beforeend\" hx-on::after-request=\"this.reset()\"><input type=\"text\" name=\"title\" placeholder=\"What needs to be done?\" required> <button type=\"submit\">Add</button></form><ul id=\"todo-list\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
