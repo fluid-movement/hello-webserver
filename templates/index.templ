@@ -1,6 +1,12 @@
 package templates
 
-import "github.com/fluid-movement/hello-webserver/internal/db"
+import (
+	"github.com/fluid-movement/hello-webserver/components/button"
+	"github.com/fluid-movement/hello-webserver/components/card"
+	"github.com/fluid-movement/hello-webserver/components/checkbox"
+	"github.com/fluid-movement/hello-webserver/components/input"
+	"github.com/fluid-movement/hello-webserver/internal/db"
+)
 
 templ Index(todos []db.Todo) {
 	<!DOCTYPE html>
@@ -9,28 +15,40 @@ templ Index(todos []db.Todo) {
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			<title>Todo App</title>
-			<link rel="preconnect" href="https://fonts.googleapis.com"/>
-			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-			<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap"/>
-			<link rel="stylesheet" href="/static/css/app.css"/>
+			<link rel="stylesheet" href="/assets/css/output.css"/>
 			<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+			@input.Script()
+			@checkbox.Script()
 		</head>
-		<body>
-			<h1>Todos</h1>
-			<form
-				hx-post="/todos"
-				hx-target="#todo-list"
-				hx-swap="beforeend"
-				hx-on::after-request="this.reset()"
-			>
-				<input type="text" name="title" placeholder="What needs to be done?" required/>
-				<button type="submit">Add</button>
-			</form>
-			<ul id="todo-list">
-				for _, todo := range todos {
-					@TodoItem(todo)
+		<body class="min-h-screen bg-background p-8">
+			<div class="mx-auto max-w-lg space-y-6 text-center">
+				<h1 class="text-2xl font-bold">Todos</h1>
+				<form
+					class="flex gap-4 mb-4"
+					hx-post="/todos"
+					hx-target="#todo-list"
+					hx-swap="beforeend"
+					hx-on::after-request="this.reset()"
+				>
+					@input.Input(input.Props{
+						Name:        "title",
+						Placeholder: "What needs to be done?",
+						Required:    true,
+					})
+					@button.Button(button.Props{Type: button.TypeSubmit, Variant: button.VariantOutline}) {
+						Add
+					}
+				</form>
+				@card.Card() {
+					@card.Content(card.ContentProps{Class: "p-0"}) {
+						<ul class="divide-y">
+							for _, todo := range todos {
+								@TodoItem(todo)
+							}
+						</ul>
+					}
 				}
-			</ul>
+			</div>
 		</body>
 	</html>
 }

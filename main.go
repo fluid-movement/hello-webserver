@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/a-h/templ"
+	"github.com/fluid-movement/hello-webserver/assets"
 	"github.com/fluid-movement/hello-webserver/internal/db"
 	"github.com/fluid-movement/hello-webserver/templates"
 	"github.com/golang-migrate/migrate/v4"
@@ -21,9 +22,6 @@ import (
 
 //go:embed migrations/*.sql
 var migrationsFS embed.FS
-
-//go:embed static
-var staticFS embed.FS
 
 type App struct {
 	queries *db.Queries
@@ -51,7 +49,7 @@ func main() {
 	}
 
 	mux := http.NewServeMux()
-	mux.Handle("GET /static/", http.FileServerFS(staticFS))
+	setupAssetsRoutes(mux)
 	mux.HandleFunc("GET /", app.handleIndex)
 	mux.HandleFunc("POST /todos", app.handleCreate)
 	mux.HandleFunc("PATCH /todos/{id}/toggle", app.handleToggle)
@@ -102,6 +100,25 @@ func (a *App) handleToggle(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	templ.Handler(templates.TodoItem(todo)).ServeHTTP(w, r)
+}
+
+func setupAssetsRoutes(mux *http.ServeMux) {
+	isDevelopment := os.Getenv("GO_ENV") != "production"
+
+	assetHandler := http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if isDevelopment {
+			w.Header().Set("Cache-Control", "no-store")
+		}
+		var fs http.Handler
+		if isDevelopment {
+			fs = http.FileServer(http.Dir("./assets"))
+		} else {
+			fs = http.FileServer(http.FS(assets.Assets))
+		}
+		fs.ServeHTTP(w, r)
+	})
+
+	mux.Handle("GET /assets/", http.StripPrefix("/assets/", assetHandler))
 }
 
 func runMigrations(databaseURL string) error {

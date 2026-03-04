@@ -1,0 +1,7 @@
+{
+  "componentsDir": "components",
+  "utilsDir": "utils",
+  "moduleName": "github.com/fluid-movement/hello-webserver",
+  "jsDir": "assets/js",
+  "jsPublicPath": "/assets/js"
+}

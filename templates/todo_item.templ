@@ -2,27 +2,37 @@ package templates
 
 import (
 	"fmt"
+	"github.com/fluid-movement/hello-webserver/components/button"
+	"github.com/fluid-movement/hello-webserver/components/checkbox"
 	"github.com/fluid-movement/hello-webserver/internal/db"
 )
 
 templ TodoItem(todo db.Todo) {
-	<li id={ fmt.Sprintf("todo-%d", todo.ID) } hx-target="this" hx-swap="outerHTML">
-		<input
-			type="checkbox"
-			checked?={ todo.Done }
-			hx-patch={ fmt.Sprintf("/todos/%d/toggle", todo.ID) }
-			hx-trigger="change"
-		/>
-		if todo.Done {
-			<s>{ todo.Title }</s>
-		} else {
-			<span>{ todo.Title }</span>
+	<li id={ fmt.Sprintf("todo-%d", todo.ID) } class="flex items-center justify-between gap-4 px-6 py-4" hx-target="this" hx-swap="outerHTML">
+		<label class="flex items-center gap-3 cursor-pointer">
+			@checkbox.Checkbox(checkbox.Props{
+				Checked: todo.Done,
+				Attributes: templ.Attributes{
+					"hx-patch":   fmt.Sprintf("/todos/%d/toggle", todo.ID),
+					"hx-trigger": "change",
+				},
+			})
+			if todo.Done {
+				<s class="text-muted-foreground">{ todo.Title }</s>
+			} else {
+				<span>{ todo.Title }</span>
+			}
+		</label>
+		@button.Button(button.Props{
+			Variant: button.VariantDestructive,
+			Size:    button.SizeSm,
+			Attributes: templ.Attributes{
+				"hx-delete": fmt.Sprintf("/todos/%d", todo.ID),
+				"hx-target": fmt.Sprintf("#todo-%d", todo.ID),
+				"hx-swap":   "outerHTML",
+			},
+		}) {
+			Delete
 		}
-		<button
-			class="delete-btn"
-			hx-delete={ fmt.Sprintf("/todos/%d", todo.ID) }
-			hx-target={ fmt.Sprintf("#todo-%d", todo.ID) }
-			hx-swap="outerHTML"
-		>Delete</button>
 	</li>
 }
