@@ -1,0 +1,28 @@
+package templates
+
+import (
+	"fmt"
+	"github.com/fluid-movement/hello-webserver/internal/db"
+)
+
+templ TodoItem(todo db.Todo) {
+	<li id={ fmt.Sprintf("todo-%d", todo.ID) } hx-target="this" hx-swap="outerHTML">
+		<input
+			type="checkbox"
+			checked?={ todo.Done }
+			hx-patch={ fmt.Sprintf("/todos/%d/toggle", todo.ID) }
+			hx-trigger="change"
+		/>
+		if todo.Done {
+			<s>{ todo.Title }</s>
+		} else {
+			<span>{ todo.Title }</span>
+		}
+		<button
+			class="delete-btn"
+			hx-delete={ fmt.Sprintf("/todos/%d", todo.ID) }
+			hx-target={ fmt.Sprintf("#todo-%d", todo.ID) }
+			hx-swap="outerHTML"
+		>Delete</button>
+	</li>
+}

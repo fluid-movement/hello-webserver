@@ -1,0 +1,129 @@
+:root {
+  /* ── Palette ── */
+  --color-page:              oklch(0.18 0.02 250);
+  --color-surface:           oklch(0.24 0.02 250);
+  --color-rule:              oklch(0.32 0.02 250);
+  --color-mid:               oklch(0.55 0.01 250);
+  --color-ink:               oklch(0.92 0.01 250);
+  --color-primary:           oklch(0.65 0.18 250);
+  --color-primary-hover:     oklch(0.72 0.18 250);
+  --color-destructive:       oklch(0.62 0.18 20);
+  --color-destructive-hover: oklch(0.70 0.18 20);
+
+  /* ── Typography ── */
+  font-size: 16px;
+  --size-xs: 0.75rem;
+  --size-sm: 0.875rem;
+  --size-base: 1rem;
+  --size-lg: 1.125rem;
+  --size-h2: 1.25rem;
+  --size-h1: 2rem;
+  --lh-base: 1.5;
+
+  /* ── Spacing ── */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+
+  /* ── Shape ── */
+  --radius: 4px;
+}
+
+/* ── Reset ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* ── Base ── */
+body {
+  font-family: sans-serif;
+  font-size: var(--size-base);
+  line-height: var(--lh-base);
+  color: var(--color-ink);
+  background: var(--color-page);
+  max-width: 600px;
+  margin: var(--space-xl) auto;
+  padding: 0 var(--space-md);
+}
+
+h1 {
+  font-size: var(--size-h1);
+  margin: 0 0 var(--space-md);
+}
+
+/* ── Form ── */
+form {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: var(--space-sm);
+  font-size: var(--size-base);
+  color: var(--color-ink);
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  appearance: none;
+}
+
+input[type="text"]:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+/* ── Buttons ── */
+button {
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--size-base);
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+}
+
+button:hover {
+  background: var(--color-primary-hover);
+}
+
+.delete-btn {
+  margin-left: auto;
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--size-sm);
+  background: var(--color-destructive);
+}
+
+.delete-btn:hover {
+  background: var(--color-destructive-hover);
+}
+
+/* ── Todo list ── */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+li:last-child {
+  border-bottom: none;
+}
+
+li s {
+  color: var(--color-mid);
+}
