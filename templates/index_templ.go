@@ -111,7 +111,7 @@ func Index(todos []db.Todo) templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<ul class=\"divide-y\">")
+				templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "<ul id=\"todo-list\" class=\"divide-y\">")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

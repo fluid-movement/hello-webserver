@@ -41,7 +41,7 @@ templ Index(todos []db.Todo) {
 				</form>
 				@card.Card() {
 					@card.Content(card.ContentProps{Class: "p-0"}) {
-						<ul class="divide-y">
+						<ul id="todo-list" class="divide-y">
 							for _, todo := range todos {
 								@TodoItem(todo)
 							}
