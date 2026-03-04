@@ -1,0 +1,24 @@
+<div class=\"relative inline-flex items-center\">
+<input
+ checked
+ disabled
+ id=\"
+\"
+ name=\"
+\"
+ value=\"
+\"
+ value=\"on\"
+ form=\"
+\"
+ data-tui-checkbox-group=\"
+\"
+ data-tui-checkbox-parent=\"true\"
+ type=\"checkbox\" class=\"
+\"
+><div class=\"absolute inset-0 pointer-events-none flex items-center justify-center text-primary-foreground opacity-0 peer-checked:opacity-100\">
+</div><div class=\"absolute inset-0 pointer-events-none flex items-center justify-center text-primary-foreground opacity-0 peer-indeterminate:opacity-100\">
+</div></div>
+<script defer nonce=\"
+\" src=\"
+\"></script>

@@ -8,5 +8,6 @@ RUN go build -o server .
 FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /app/server .
+ENV GO_ENV=production
 EXPOSE 8080
 CMD ["./server"]

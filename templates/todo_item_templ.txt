@@ -1,0 +1,9 @@
+<li id=\"
+\" class=\"flex items-center justify-between gap-4 px-6 py-4\" hx-target=\"this\" hx-swap=\"outerHTML\"><label class=\"flex items-center gap-3 cursor-pointer\">
+<s class=\"text-muted-foreground\">
+</s>
+<span>
+</span>
+</label>
+Delete
+</li>
